@@ -8,10 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet" />
 
 <style>
-  /* Общие стили */
+  /* Общие стили для кроссбраузерности */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
-    font-family: 'Lobster', cursive;
+    font-family: 'Lobster', cursive, Arial, sans-serif; /* резервные шрифты */
     background-color: #ffefef;
     color: #d80000;
     display: flex;
@@ -26,8 +30,7 @@
     padding: 16px;
     text-align: center;
     font-size: 1.8em;
-    font-weight: normal;
-    font-family: 'Lobster', cursive;
+    font-family: 'Lobster', cursive, Arial, sans-serif;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -42,16 +45,16 @@
     padding: 16px;
   }
 
-  /* PDF просмотр с прозрачной рамкой */
+  /* PDF просмотр с прозрачной рамкой, поддержка в Safari */
   #pdfViewer {
     width: 95%;
     max-width: 1000px;
     height: calc(100vh - 150px);
     border-radius: 8px;
     border: 4px solid transparent; /* прозрачная рамка */
-    box-shadow: none;
     background-color: #fff;
     display: block;
+    /* Для Safari: использовать -webkit- для свойств, если нужно */
   }
 
   /* Контейнер для кнопок */
@@ -78,7 +81,7 @@
     margin: 8px;
     min-width: 150px;
     text-align: center;
-    font-family: 'Lobster', cursive;
+    font-family: 'Lobster', cursive, Arial, sans-serif;
   }
 
   .material-button:hover {
@@ -88,10 +91,7 @@
 
   /* Запрет печати: скрываем контейнеры при печати */
   @media print {
-    #pdfContainer {
-      display: none;
-    }
-    #buttonsContainer {
+    #pdfContainer, #buttonsContainer {
       display: none;
     }
   }
@@ -108,7 +108,6 @@
       width: 100%;
       max-width: none;
     }
-  
   }
 </style>
 </head>
@@ -120,10 +119,10 @@
 
 <div id="pdfContainer">
   <!-- Используем iframe для просмотра PDF -->
-  <iframe id="pdfViewer" src="menu.pdf" type="application/pdf" allowfullscreen></iframe>
+<iframe id="pdfViewer" src="menu.pdf" type="application/pdf" allowfullscreen title="Просмотр PDF"></iframe>
+</div>
 
-
-
+<!-- Можно добавить сюда кнопки, если нужно -->
 
 </body>
 </html>
